@@ -3,12 +3,21 @@ require "config.php";
 require "game.php";
 
 $game_list = array();
+$privates = array();
 
 foreach($steam_ids as $id => $name)
 {
 	$url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" . $steam_api_key . "&steamid=" . $id . "&format=json&include_played_free_games=1&include_appinfo=1";
 	$data = file_get_contents($url);
-	$jgames = json_decode($data, true)["response"]["games"];
+	$jdata = json_decode($data, true)["response"];
+
+	if (empty($jdata))
+	{
+		array_push($privates, $name);
+		continue;
+	}
+
+	$jgames = $jdata["games"];
 
 	foreach($jgames as $g)
 	{
@@ -23,6 +32,12 @@ foreach($steam_ids as $id => $name)
 	}
 }
 
+echo "Private profiles: <ul>" . PHP_EOL;
+foreach($privates as $name)
+{
+	echo "<li>" . $name . "</li>" . PHP_EOL;
+}
+echo "</ul>" . PHP_EOL;
 echo "<input type='search' autofocus oninput='performSearch(this)' data-set='game_list' data-key='name'/>" . PHP_EOL;
 echo "<ul id='game_list'>" . PHP_EOL;
 foreach($game_list as $game)
