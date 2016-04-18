@@ -38,11 +38,16 @@ foreach($privates as $name)
 	echo "<li>" . $name . "</li>" . PHP_EOL;
 }
 echo "</ul>" . PHP_EOL;
-echo "<input type='search' autofocus oninput='performSearch(this)' data-set='game_list' data-key='name'/>" . PHP_EOL;
+echo "<input type='search' autofocus oninput='performSearch(this)' data-set='game_list' data-keys='name accounts'/>" . PHP_EOL;
 echo "<ul id='game_list'>" . PHP_EOL;
 foreach($game_list as $game)
 {
-	echo "<li data-name='" . $game->name . "'>" . PHP_EOL;
+	echo "<li data-name='" . $game->name . "' data-accounts='";
+	foreach ($game->accounts as $name)
+	{
+		echo $name . " ";
+	}
+	echo "'>" . PHP_EOL;
 	echo $game->toHTML();
 	echo "</li>" . PHP_EOL;
 }
