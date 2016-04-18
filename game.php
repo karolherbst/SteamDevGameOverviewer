@@ -4,10 +4,15 @@ class Game
 	public $id;
 	public $name = "a Game";
 	public $accounts = array();
+	public $img_icon_url;
+	public $img_logo_url;
 
-	public function __construct($id)
+	public function __construct($g)
 	{
-		$this->id = $id;
+		$this->id = $g["appid"];
+		$this->name = $g["name"];
+		$this->img_icon_url = $g["img_icon_url"];
+		$this->img_logo_url = $g["img_logo_url"];
 	}
 
 	public function toHTML()
