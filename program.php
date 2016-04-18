@@ -24,12 +24,12 @@ foreach($steam_ids as $id => $name)
 	}
 }
 
-echo "<ul>";
+echo "<ul>" . PHP_EOL;
 foreach($game_list as $game)
 {
-	echo "<li>";
+	echo "<li>" . PHP_EOL;
 	echo $game->toHTML();
-	echo "</li>";
+	echo "</li>" . PHP_EOL;
 }
-echo "</ul>";
+echo "</ul>" . PHP_EOL;
 ?>
