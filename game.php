@@ -5,6 +5,11 @@ class Game
 	public $name = "a Game";
 	public $accounts = array();
 
+	public function __construct($id)
+	{
+		$this->id = $id;
+	}
+
 	public function toHTML()
 	{
 		$res = $this->name . " (" . $this->id . ")" . PHP_EOL . "<ul>" . PHP_EOL;

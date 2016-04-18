@@ -14,8 +14,7 @@ foreach($steam_ids as $id => $name)
 	{
 		if (!array_key_exists($g["appid"], $game_list))
 		{
-			$game = new Game();
-			$game->id = $g["appid"];
+			$game = new Game($g["appid"]);
 			array_push($game->accounts, $name);
 			$game_list[$game->id] = $game;
 		} else {
