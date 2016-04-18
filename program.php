@@ -23,6 +23,7 @@ foreach($steam_ids as $id => $name)
 	}
 }
 
+echo "<input autofocus class='searchfield' />" . PHP_EOL;
 echo "<ul>" . PHP_EOL;
 foreach($game_list as $game)
 {
