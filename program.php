@@ -6,7 +6,7 @@ $game_list = array();
 
 foreach($steam_ids as $id => $name)
 {
-	$url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" . $steam_api_key . "&steamid=" . $id . "&format=json";
+	$url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" . $steam_api_key . "&steamid=" . $id . "&format=json&include_played_free_games=1&include_appinfo=1";
 	$data = file_get_contents($url);
 	$jgames = json_decode($data, true)["response"]["games"];
 
