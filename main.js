@@ -6,8 +6,8 @@ function performSearch(input)
 		var child = dataSet.children[i];
 		var name = child.getAttribute("data-" + input.getAttribute("data-key"));
 		if (name.toLowerCase().indexOf(input.value.toLowerCase()) != -1)
-			child.className = "";
+			child.classList.remove("hidden");
 		else
-			child.className = "hidden";
+			child.classList.add("hidden");
 	}
 }
