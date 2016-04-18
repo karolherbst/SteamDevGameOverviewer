@@ -9,8 +9,10 @@ function performSearch(input)
 
 		for (var j = 0; j < keys.length; j++) {
 			var key = child.getAttribute("data-" + keys[j]);
-			if (key && key.toLowerCase().indexOf(input.value.toLowerCase()) != -1)
+			if (key && key.toLowerCase().indexOf(input.value.toLowerCase()) != -1) {
 				match = true;
+				break;
+			}
 		}
 
 		if (match)
