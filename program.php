@@ -37,6 +37,7 @@ foreach($privates as $name)
 	echo "<li>" . $name . "</li>" . PHP_EOL;
 }
 echo "</ul>" . PHP_EOL;
+echo "Search for Games, Developers, Platforms or whatever you want!: ";
 echo "<input type='search' autofocus oninput='performSearch(this)' data-set='game_list' data-keys='name accounts platforms'/>" . PHP_EOL;
 echo "<ul id='game_list'>" . PHP_EOL;
 foreach($game_list as $game)
