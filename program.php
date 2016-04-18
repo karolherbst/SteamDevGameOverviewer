@@ -1,5 +1,4 @@
 <?php
-require "config.php";
 require "game.php";
 
 $game_list = array();
