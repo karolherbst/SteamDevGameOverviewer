@@ -42,7 +42,7 @@ echo "<input type='search' autofocus oninput='performSearch(this)' data-set='gam
 echo "<ul id='game_list'>" . PHP_EOL;
 foreach($game_list as $game)
 {
-	echo "<li data-name='" . $game->name . "' data-accounts='";
+	echo "<li data-name='" . str_replace('"', "", str_replace("'", "", $game->name)) . "' data-accounts='";
 	foreach ($game->accounts as $name)
 	{
 		echo $name . " ";
