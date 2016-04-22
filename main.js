@@ -6,7 +6,7 @@ function performSearch(input)
 		var child = dataSet.children[i];
 		var match = false;
 		var keys = input.getAttribute("data-keys").split(" ");
-		var s = input.value.toLowerCase().replace(/[.'\"]/g, "");
+		var s = input.value.toLowerCase().replace(/[.'\":]/g, "");
 
 		for (var j = 0; j < keys.length; j++) {
 			var key = child.getAttribute("data-" + keys[j]);
