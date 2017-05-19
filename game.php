@@ -35,6 +35,7 @@ class Game
 {
 	public $id;
 	public $name = "a Game";
+	public $publisher = "a Publisher";
 	public $accounts = array();
 	public $img_icon_url;
 	public $img_logo_url;
