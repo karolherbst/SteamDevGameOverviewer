@@ -1,3 +1,7 @@
 .hidden {
 	display: none;
 }
+
+#game_list > li {
+	margin: 1em 0;
+}

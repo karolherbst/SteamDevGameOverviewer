@@ -1,36 +1,4 @@
 <?php
-class GameInformation
-{
-	private static $instance;
-	private $game_linux_supported = array();
-
-	public function __construct()
-	{
-		$url = "https://raw.githubusercontent.com/SteamDatabase/SteamLinux/master/GAMES.json";
-		$data = file_get_contents($url);
-		$this->game_linux_supported = json_decode($data, true);
-	}
-
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
-	public function supportsLinux(Game $game)
-	{
-		if(array_key_exists($game->id, $this->game_linux_supported))
-		{
-			if($this->game_linux_supported[$game->id])
-				return true;
-		}
-		return false;
-	}
-}
-
 class Game
 {
 	public $id;
@@ -40,6 +8,9 @@ class Game
 	public $img_icon_url;
 	public $img_logo_url;
 	public $platforms = array();
+	public $genres = array();
+	public $multiplayer = false;
+	public $coop = false;
 
 	public function __construct($g)
 	{
@@ -47,18 +18,60 @@ class Game
 		$this->name = $g["name"];
 		$this->img_icon_url = $g["img_icon_url"];
 		$this->img_logo_url = $g["img_logo_url"];
-		if (GameInformation::getInstance()->supportsLinux($this))
+
+		$url = "https://store.steampowered.com/api/appdetails?appids=" . $this->id;
+		$data = cached_file_get_contents($url, "game", $this->id, 30);
+		// rate limited
+		if(strcmp($data, "") == 0)
+			return;
+		$parsed = json_decode($data, true);
+		if(!$parsed[$this->id]["success"])
+			return;
+
+		$data = $parsed[$this->id]["data"];
+		if($data["platforms"]["windows"])
+			array_push($this->platforms, "windows");
+		if($data["platforms"]["mac"])
+			array_push($this->platforms, "mac");
+		if($data["platforms"]["linux"])
 			array_push($this->platforms, "linux");
+
+		if(array_key_exists("genres", $data))
+			foreach($data["genres"] as $g)
+				array_push($this->genres, $g["description"]);
+
+		if(array_key_exists("categories", $data)) {
+			foreach($data["categories"] as $c) {
+				switch($c["description"]) {
+				case "Multi-player":
+					$this->multiplayer = true;
+					break;
+				case "Co-op":
+				case "Online Co-op":
+					$this->coop = true;
+					break;
+				}
+			}
+		}
 	}
 
 	public function toHTML()
 	{
-		$res = $this->name . " (" . $this->id . ")";
+		$res = "<img src='https://media.steampowered.com/steamcommunity/public/images/apps/" . $this->id . "/" . $this->img_logo_url . ".jpg'/><br/>";
+		$res .= $this->name . " (" . $this->id . ")";
+		if(in_array("windows", $this->platforms))
+			$res .= " 🪟";
+		if(in_array("mac", $this->platforms))
+			$res .= " 🍎";
 		if(in_array("linux", $this->platforms))
-			$res .= " Linux support!";
+			$res .= " 🐧";
+		if($this->coop || $this->multiplayer)
+			$res .= " 👥";
+		if($this->coop)
+			$res .= " 🤝";
+		$res .= " " . implode(" ", $this->genres);
 		$res .= PHP_EOL . "<ul>" . PHP_EOL;
-		foreach($this->accounts as $a)
-		{
+		foreach($this->accounts as $a) {
 			$res .= "<li>" . $a . "</li>" . PHP_EOL;
 		}
 		$res .= "</ul>" . PHP_EOL;

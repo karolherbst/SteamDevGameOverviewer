@@ -1,10 +1,11 @@
 <?php
 require "config.php";
+require "util.php"
 ?>
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Steam Dev Games Overview!</title>
+  <title>Shared Steam games!</title>
 <?php
 if (!$single_file)
 {
