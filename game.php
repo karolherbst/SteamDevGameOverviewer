@@ -1,10 +1,12 @@
 <?php
+use Ds\Set;
+
 class Game
 {
 	public $id;
 	public $name = "a Game";
 	public $publisher = "a Publisher";
-	public $accounts = array();
+	public $accounts = null;
 	public $img_icon_url;
 	public $img_logo_url;
 	public $platforms = array();
@@ -14,6 +16,7 @@ class Game
 
 	public function __construct($g)
 	{
+		$this->accounts = new Set();
 		$this->id = $g["appid"];
 		$this->name = $g["name"];
 		$this->img_icon_url = $g["img_icon_url"];

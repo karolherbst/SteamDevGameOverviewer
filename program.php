@@ -23,10 +23,10 @@ foreach($steam_ids as $id => $name)
 		if (!array_key_exists($g["appid"], $game_list))
 		{
 			$game = new Game($g);
-			array_push($game->accounts, $name);
+			$game->accounts[] = $name;
 			$game_list[$game->id] = $game;
 		} else {
-			array_push($game_list[$g["appid"]]->accounts, $name);
+			$game_list[$g["appid"]]->accounts[] = $name;
 		}
 	}
 }
@@ -55,7 +55,7 @@ echo "<ul id='game_list'>" . PHP_EOL;
 foreach($game_list as $game)
 {
 	echo "<li data-name='" . preg_replace("/[.:'\"]/", "", $game->name);
-	echo "' data-accounts='" . implode(" ", $game->accounts);
+	echo "' data-accounts='" . $game->accounts->join(" ");
 	echo "' data-platforms='" . implode(" ", $game->platforms);
 	echo "' data-genres='" . implode(" ", $game->genres);
 	echo "'";
