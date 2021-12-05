@@ -16,10 +16,8 @@ function performSearch(i)
 		var isCoop = child.getAttribute("data-coop") != null;
 		var isMp = child.getAttribute("data-mp") != null;
 
-		if ((!coop.checked && !mp.checked) ||
-		    (coop.checked && !mp.checked && isCoop) ||
-		    (!coop.checked && mp.checked && isMp) ||
-		    (coop.checked && mp.checked && isCoop && isMp)) {
+		if (!((coop.checked && !isCoop) ||
+		      (mp.checked && !isMp))) {
 			for (var j = 0; j < keys.length; j++) {
 				var key = child.getAttribute("data-" + keys[j]);
 				if (key && key.toLowerCase().indexOf(s) != -1) {
