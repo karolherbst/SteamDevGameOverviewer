@@ -32,6 +32,7 @@ class Game
 			return;
 
 		$data = $parsed[$this->id]["data"];
+		$this->name = $data["name"];
 		if($data["platforms"]["windows"])
 			array_push($this->platforms, "windows");
 		if($data["platforms"]["mac"])
