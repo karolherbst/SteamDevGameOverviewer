@@ -13,7 +13,7 @@ function performSearch(i)
 		(e) => e.name
 	);
 
-	for (i = 0; i < dataSet.childElementCount; ++i)
+	for (i = 0; i < dataSet.children.length; ++i)
 	{
 		var child = dataSet.children[i];
 		var match = false;
