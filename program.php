@@ -55,7 +55,7 @@ echo "<ul id='game_list'>" . PHP_EOL;
 foreach($game_list as $game)
 {
 	echo "<li data-name='" . preg_replace("/[.:'\"]/", "", $game->name);
-	echo "' data-accounts='" . $game->accounts->join(" ");
+	echo "' data-accounts='" . json_encode($game->accounts);
 	echo "' data-platforms='" . implode(" ", $game->platforms);
 	echo "' data-genres='" . implode(" ", $game->genres);
 	echo "'";
