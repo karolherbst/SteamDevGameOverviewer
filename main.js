@@ -13,6 +13,9 @@ function performSearch(i)
 		(e) => e.name
 	);
 
+	var hide = [];
+	var show = [];
+
 	for (i = 0; i < dataSet.children.length; ++i)
 	{
 		var child = dataSet.children[i];
@@ -35,8 +38,14 @@ function performSearch(i)
 		}
 
 		if (match)
-			child.classList.remove("hidden");
+			show.push(child);
 		else
-			child.classList.add("hidden");
+			hide.push(child);
 	}
+
+	// batch layout changes
+	dataSet.classList.add("hidden");
+	hide.forEach(e => e.classList.add("hidden"));
+	show.forEach(e => e.classList.remove("hidden"));
+	dataSet.classList.remove("hidden");
 }
