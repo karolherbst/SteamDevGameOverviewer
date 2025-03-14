@@ -2,6 +2,8 @@
 	display: none;
 }
 
-#game_list > li {
+#game_list > li:not(.hidden) {
 	margin: 1em 0;
+	display: flex;
+	flex-direction: row;
 }

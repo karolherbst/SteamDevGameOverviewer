@@ -29,6 +29,13 @@ foreach($steam_ids as $id => $name)
 			$game_list[$g["appid"]]->accounts[] = $name;
 		}
 	}
+
+	$url = "https://store.steampowered.com/wishlist/profiles/" . $id . "/wishlistdata/";
+	$data = cached_file_get_contents($url, "wishlist", $id, 1);
+	if (!$data)
+		continue;
+
+	$jdata = json_decode($data, true);
 }
 
 function cmp($a, $b)

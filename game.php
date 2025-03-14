@@ -20,7 +20,6 @@ class Game
 		$this->id = $g["appid"];
 		$this->name = $g["name"];
 		$this->img_icon_url = $g["img_icon_url"];
-		$this->img_logo_url = $g["img_logo_url"];
 
 		$url = "https://store.steampowered.com/api/appdetails?appids=" . $this->id;
 		$data = cached_file_get_contents($url, "game", $this->id, 30);
@@ -61,7 +60,8 @@ class Game
 
 	public function toHTML()
 	{
-		$res = "<img src='https://media.steampowered.com/steamcommunity/public/images/apps/" . $this->id . "/" . $this->img_logo_url . ".jpg'/><br/>";
+//		$res = "<img src='https://media.steampowered.com/steamcommunity/public/images/apps/" . $this->id . "/" . $this->img_icon_url . ".jpg'/><br/>";
+		$res = "<img src='https://steamcdn-a.akamaihd.net/steam/apps/" . $this->id . "/header.jpg' width='200' /><div>";
 		$res .= $this->name . " (" . $this->id . ")";
 		if(in_array("windows", $this->platforms))
 			$res .= " 🪟";
@@ -78,7 +78,7 @@ class Game
 		foreach($this->accounts as $a) {
 			$res .= "<li>" . $a . "</li>" . PHP_EOL;
 		}
-		$res .= "</ul>" . PHP_EOL;
+		$res .= "</ul></div>" . PHP_EOL;
 		return $res;
 	}
 }
