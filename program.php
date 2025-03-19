@@ -56,8 +56,8 @@ foreach($privates as $name)
 echo "</ul>" . PHP_EOL;
 echo "Search for Games, Developers, Platforms or whatever you want!: ";
 echo "<input id='search' type='search' autofocus oninput='performSearch(this)' data-set='game_list' data-keys='name accounts platforms genres'/><br/>" . PHP_EOL;
-echo "<input id='coop-check' type='checkbox' name='Co-op' onchange='performSearch(undefined)'/>🤝<br/>" . PHP_EOL;
-echo "<input id='mp-check' type='checkbox' name='mp' onchange='performSearch(undefined)'/>👥<br/>" . PHP_EOL;
+echo "<input id='coop-check' type='checkbox' name='Co-op' onchange='performSearch(undefined)'/>🤝 (co-op)<br/>" . PHP_EOL;
+echo "<input id='mp-check' type='checkbox' name='mp' onchange='performSearch(undefined)'/>👥 (Multiplayer)<br/>" . PHP_EOL;
 echo "<ul id='acc_list'>" . PHP_EOL;
 foreach(array_unique($steam_ids) as $id => $name)
 {
